@@ -16,7 +16,7 @@ public class VehicleService {
 
     private final VehicleRepository repository;
 
-    List<Vehicle> all() {
+    public List<Vehicle> all() {
         return StreamSupport.stream(repository.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
