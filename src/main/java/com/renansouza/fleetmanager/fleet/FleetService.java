@@ -26,10 +26,13 @@ public class FleetService {
             throw new IllegalArgumentException("Cannot process forecast without valid distance.");
         }
 
-        return service.all().stream()
-                .filter(Vehicle::isActive)
-                .map(vehicle -> new VehicleForecast(vehicle, gasPrice, cityDistance, roadDistance))
-                .sorted(Comparator.comparingDouble(VehicleForecast::getTotal))
-                .collect(Collectors.toList());
+        final List<Vehicle> vehicles = service.all().stream().filter(Vehicle::isActive).collect(Collectors.toList());
+        if (vehicles.isEmpty()) {
+            throw new FleetNotFoundException("No vehicles found to process.");
+        } else {
+            return vehicles.stream().map(vehicle -> new VehicleForecast(vehicle, gasPrice, cityDistance, roadDistance))
+                    .sorted(Comparator.comparingDouble(VehicleForecast::getTotal))
+                    .collect(Collectors.toList());
+        }
     }
 }
