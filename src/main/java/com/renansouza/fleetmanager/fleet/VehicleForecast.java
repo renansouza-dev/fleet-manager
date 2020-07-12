@@ -2,7 +2,6 @@ package com.renansouza.fleetmanager.fleet;
 
 import com.renansouza.fleetmanager.vehicle.Vehicle;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

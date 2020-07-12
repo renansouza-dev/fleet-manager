@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.util.List;
 
-import static com.renansouza.fleetmanager.fleet.FleetUtils.*;
+import static com.renansouza.fleetmanager.MvcUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -38,7 +38,7 @@ class FleetServiceTest {
     @Test
     @DisplayName("Test fleet forecast")
     void process() {
-        when(vehicleService.all()).thenReturn(FleetUtils.getVehicles());
+        when(vehicleService.allActive()).thenReturn(getVehicles());
 
         final List<VehicleForecast> vehicleForecasts = service.process(BigDecimal.valueOf(3.99), 100, 100);
         assertThat(vehicleForecasts).hasSize(3);

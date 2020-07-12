@@ -1,13 +1,13 @@
-package com.renansouza.fleetmanager.fleet;
+package com.renansouza.fleetmanager;
 
 import com.renansouza.fleetmanager.vehicle.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FleetUtils {
+public class MvcUtils {
 
-    static Vehicle getVehicle1() {
+    public static Vehicle getVehicle1() {
         Vehicle vehicle1 = new Vehicle();
         vehicle1.setName("Ford KA");
         vehicle1.setBrand("Ford");
@@ -20,7 +20,7 @@ public class FleetUtils {
         return vehicle1;
     }
 
-    static Vehicle getVehicle2() {
+    public static Vehicle getVehicle2() {
         Vehicle vehicle2 = new Vehicle();
         vehicle2.setName("Chevrolet Onix");
         vehicle2.setBrand("Chevrolet");
@@ -33,7 +33,7 @@ public class FleetUtils {
         return vehicle2;
     }
 
-    static Vehicle getVehicle3() {
+    public static Vehicle getVehicle3() {
         Vehicle vehicle3 = new Vehicle();
         vehicle3.setName("Volkswagen Gol");
         vehicle3.setBrand("Volkswagen");
@@ -46,7 +46,7 @@ public class FleetUtils {
         return vehicle3;
     }
 
-    static List<Vehicle> getVehicles() {
+    public static List<Vehicle> getVehicles() {
         List<Vehicle> vehicles = new ArrayList<>();
         vehicles.add(getVehicle1());
         vehicles.add(getVehicle2());

@@ -11,9 +11,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Transactional
 @SpringBootTest
@@ -92,6 +93,27 @@ class VehicleRepositoryTest {
         vehicle.setName("Ford KA+");
         assertThat(vehicle).isNotNull();
         assertThat(repository.findById(vehicle.getId()).get()).isEqualTo(vehicle);
+    }
+
+    @Test
+    @DisplayName("Find all vehicles actives")
+    void findAllActives() {
+        assertThat(repository.findAll()).isEmpty();
+
+        vehicle = repository.save(vehicle);
+
+        final Vehicle vehicle2 = new Vehicle();
+        vehicle2.setName("Chevrolet Onix");
+        vehicle2.setBrand("Chevrolet");
+        vehicle2.setModel("Onix");
+        vehicle2.setActive(false);
+        vehicle2.setFabricationYear(2020);
+        vehicle2.setCityConsumption(13.9);
+        vehicle2.setRoadConsumption(16.7);
+
+        final List<Vehicle> vehicles = repository.findVehicleByActiveTrue();
+        assertThat(vehicles).hasSize(1);
+        assertThat(vehicles.get(0)).isEqualTo(vehicle);
     }
 
     @Test

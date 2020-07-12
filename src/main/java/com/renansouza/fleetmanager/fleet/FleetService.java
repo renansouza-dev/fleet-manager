@@ -16,7 +16,6 @@ public class FleetService {
 
     private final VehicleService service;
 
-    // FIXME ignore active by default
     List<VehicleForecast> process(final BigDecimal gasPrice, final long cityDistance, final long roadDistance) {
         if (gasPrice == null || gasPrice.equals(BigDecimal.ZERO)) {
             throw new IllegalArgumentException("Cannot process forecast without valid gas price.");
@@ -26,7 +25,7 @@ public class FleetService {
             throw new IllegalArgumentException("Cannot process forecast without valid distance.");
         }
 
-        final List<Vehicle> vehicles = service.all().stream().filter(Vehicle::isActive).collect(Collectors.toList());
+        final List<Vehicle> vehicles = service.allActive();
         if (vehicles.isEmpty()) {
             throw new FleetNotFoundException("No vehicles found to process.");
         } else {
@@ -35,4 +34,5 @@ public class FleetService {
                     .collect(Collectors.toList());
         }
     }
+
 }

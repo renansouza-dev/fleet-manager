@@ -1,6 +1,7 @@
 package com.renansouza.fleetmanager.fleet;
 
 import com.renansouza.fleetmanager.AbstractMvcTest;
+import com.renansouza.fleetmanager.MvcUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,11 +41,11 @@ class FleetControllerTest extends AbstractMvcTest {
     @Test
     @DisplayName("Process cost")
     void process() throws Exception {
-        for (int i = 0; i < FleetUtils.getVehicles().size(); i++) {
+        for (int i = 0; i < MvcUtils.getVehicles().size(); i++) {
             int expectedId = i +1;
 
             mvc.perform(MockMvcRequestBuilders.post("/vehicles")
-                    .contentType(MediaType.APPLICATION_JSON).content(mapToJson(FleetUtils.getVehicles().get(i))))
+                    .contentType(MediaType.APPLICATION_JSON).content(mapToJson(MvcUtils.getVehicles().get(i))))
                     .andExpect(content().contentType(MediaTypes.HAL_JSON))
                     .andExpect(status().isCreated())
                     .andExpect(jsonPath("$.id", is(expectedId)))

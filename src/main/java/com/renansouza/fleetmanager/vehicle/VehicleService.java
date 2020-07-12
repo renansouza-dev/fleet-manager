@@ -16,8 +16,13 @@ public class VehicleService {
 
     private final VehicleRepository repository;
 
-    public List<Vehicle> all() {
+    List<Vehicle> all() {
         return StreamSupport.stream(repository.findAll().spliterator(), false).collect(Collectors.toList());
+    }
+
+    // FIXME test
+    public List<Vehicle> allActive() {
+        return repository.findVehicleByActiveTrue();
     }
 
     Optional<Vehicle> one(int id) {
